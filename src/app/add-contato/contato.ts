@@ -1,19 +1,21 @@
+
 import { TipoContato } from "./tipoContato"
 
 export class Contato {
-    Nome: string
-    Telefone: string
-    Email: string
-    Aniversario: Date
-    Tipo: TipoContato
+  
+    nome: string;
+    telefone: string;
+    email: string;
+    aniversario?: Date | undefined; 
+    tipo?: TipoContato;
 
-    constructor(nm:string,tel:string,email:string,ani:Date,tipo: TipoContato){
-        this.Nome = nm,
-        this.Telefone = tel
-        this.Email = email
-        this.Aniversario = ani
-        this.Tipo = tipo
-
-    }
-
+   
+    constructor(nm:string, tel:string, email:string, ani:Date | undefined, tipo: TipoContato | undefined){
+    
+        this.nome = nm;
+        this.telefone = tel;
+        this.email = email;
+        this.aniversario = ani;
+        this.tipo = tipo; 
+}
 }

@@ -1,28 +1,81 @@
 <p>Agenda - Contatos</p>
 
-<form class="agenda-form">
-    <div class="input-group">
-      <label for="Nome">Nome Contato</label>
-      <input id="Nome" type="number" [(ngModel)]="nm" name="Nome" min="0" max="100">
-    </div>
+<form class="agenda-form" (ngSubmit)="adicionarContato()">
+  <div class="input-group">
+    <label for="nomeContato">Nome Contato:</label>
+    <input
+      id="nomeContato"
+      type="text"
+      [(ngModel)]="nome"
+      name="nomeContato"
+      required
+    />
+  </div>
 
-<form class="agenda-form">
-    <div class="input-group">
-        <label for="Nome">Nome Contato</label>
-        <input id="Nome" type="number" [(ngModel)]="nm" name="Nome" min="0" max="100">
-    </div>
+  <div class="input-group">
+    <label for="telefoneContato">Telefone:</label>
+    <input
+      id="telefoneContato"
+      type="tel"
+      [(ngModel)]="telefone"
+      name="telefoneContato"
+      required
+    />
+  </div>
 
-<form class="agenda-form">
-    <div class="input-group">
-        <label for="Nome">Nome Contato</label>
-        <input id="Nome" type="number" [(ngModel)]="nm" name="Nome" min="0" max="100">
-    </div>
+  <div class="input-group">
+    <label for="emailContato">Email:</label>
+    <input
+      id="emailContato"
+      type="email"
+      [(ngModel)]="email"
+      name="emailContato"
+    />
+  </div>
 
+  <div class="input-group">
+    <label for="aniversarioContato">Data de Nascimento:</label>
+    <input
+      id="aniversarioContato"
+      type="date"
+      [(ngModel)]="aniversario" 
+      name="aniversarioContato"
+    />
+  </div>
 
+  <div class="input-group">
+    <label for="tipoContato">Tipo de Contato:</label>
+    <select
+      id="tipoContato"
+      name="tipoContato"
+      [(ngModel)]="tipoContato"
+      required
+    >
+      <option [ngValue]="undefined" disabled>Selecione um tipo</option>
+      <option *ngFor="let tipo of tiposDisponiveis" [ngValue]="tipo">
+        {{ tipo }}
+      </option>
+    </select>
+  </div>
 
+  <button type="submit">Adicionar Contato</button>
+</form>
 
+<hr />
+<h2>Lista de Contatos:</h2>
 
+<div *ngIf="contatos.length === 0">
+  <p>Nenhum contato adicionado ainda.</p>
+</div>
 
-
-  
-
+<ul *ngIf="contatos.length > 0">
+  <li *ngFor="let contato of contatos">
+    <strong>Nome:</strong> {{ contato.nome }} <br />
+    <strong>Telefone:</strong> {{ contato.telefone }} <br />
+    <strong>Email:</strong> {{ contato.email || 'Não informado' }} <br />
+    <strong>Nascimento:</strong>
+    {{ contato.aniversario ? (contato.aniversario | date : 'dd/MM/yyyy') : 'Não informado' }} <br />
+    <strong>Tipo:</strong> {{ contato.tipo }}
+    <hr />
+  </li>
+</ul>
